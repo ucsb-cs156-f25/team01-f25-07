@@ -15,10 +15,10 @@ TODO: Fill in this table with correct information.
 
 | Table                     | Name         | Github Id |
 |---------------------------|--------------|-----------|
-| UCSBDiningCommonsMenuItem |              |           |
+| UCSBDiningCommonsMenuItem |Arman         |ArmanSajjadian|
 | UCSBOrganization          |              |           |
 | RecommendationRequest     |              |           |
-| MenuItemReview            |              |           |
+| MenuItemReview            |Matthew M.    |matthewmandell|
 | HelpRequest               |              |           |
 | Articles                  |Ian Sheinis|IanSheinis|
 

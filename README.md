@@ -17,7 +17,7 @@ TODO: Fill in this table with correct information.
 |---------------------------|--------------|-----------|
 | UCSBDiningCommonsMenuItem |Arman         |ArmanSajjadian|
 | UCSBOrganization          |Yuchao Z      |yuchaozheng05 |
-| RecommendationRequest     |              |           |
+| RecommendationRequest     |Sicheng X.    |2818973981|
 | MenuItemReview            |Jakinda       |JakindaZhang|
 | HelpRequest               |Matthew M.    |matthewmandell|
 | Articles                  |Ian Sheinis|IanSheinis|

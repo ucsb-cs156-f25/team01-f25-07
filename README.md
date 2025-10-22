@@ -18,8 +18,8 @@ TODO: Fill in this table with correct information.
 | UCSBDiningCommonsMenuItem |Arman         |ArmanSajjadian|
 | UCSBOrganization          |Yuchao Z      |yuchaozheng05 |
 | RecommendationRequest     |              |           |
-| MenuItemReview            |Matthew M.    |matthewmandell|
-| HelpRequest               |              |           |
+| MenuItemReview            |Jakinda       |JakindaZhang|
+| HelpRequest               |Matthew M.    |matthewmandell|
 | Articles                  |Ian Sheinis|IanSheinis|
 
 Remember though, that in spite of these initial  assignments, it is still

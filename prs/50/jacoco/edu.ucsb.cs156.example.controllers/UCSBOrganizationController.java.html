@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = &quot;UCSBOrganization&quot;)
 @RequestMapping(&quot;/api/UCSBOrganization&quot;)
 @RestController
-<span class="nc" id="L21">@Slf4j</span>
-<span class="nc" id="L22">public class UCSBOrganizationController extends ApiController {</span>
+<span class="fc" id="L21">@Slf4j</span>
+<span class="fc" id="L22">public class UCSBOrganizationController extends ApiController {</span>
 
   @Autowired UCSBOrganizationRepository ucsbOrganizationRepository;
 
@@ -32,8 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
   @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
   @GetMapping(&quot;/all&quot;)
   public Iterable&lt;UCSBOrganization&gt; allOrganizations() {
-<span class="nc" id="L35">    Iterable&lt;UCSBOrganization&gt; orgs = ucsbOrganizationRepository.findAll();</span>
-<span class="nc" id="L36">    return orgs;</span>
+<span class="fc" id="L35">    Iterable&lt;UCSBOrganization&gt; orgs = ucsbOrganizationRepository.findAll();</span>
+<span class="fc" id="L36">    return orgs;</span>
   }
 
   //      /**
@@ -72,14 +72,14 @@ import org.springframework.web.bind.annotation.RestController;
       @Parameter(name = &quot;orgTranslationShort&quot;) @RequestParam String orgTranslationShort,
       @Parameter(name = &quot;orgTranslation&quot;) @RequestParam String orgTranslation,
       @Parameter(name = &quot;inactive&quot;) @RequestParam boolean inactive) {
-<span class="nc" id="L75">    UCSBOrganization org = new UCSBOrganization();</span>
-<span class="nc" id="L76">    org.setOrgCode(orgCode);</span>
-<span class="nc" id="L77">    org.setOrgTranslationShort(orgTranslationShort);</span>
-<span class="nc" id="L78">    org.setOrgTranslation(orgTranslation);</span>
-<span class="nc" id="L79">    org.setInactive(inactive);</span>
+<span class="fc" id="L75">    UCSBOrganization org = new UCSBOrganization();</span>
+<span class="fc" id="L76">    org.setOrgCode(orgCode);</span>
+<span class="fc" id="L77">    org.setOrgTranslationShort(orgTranslationShort);</span>
+<span class="fc" id="L78">    org.setOrgTranslation(orgTranslation);</span>
+<span class="fc" id="L79">    org.setInactive(inactive);</span>
 
-<span class="nc" id="L81">    UCSBOrganization savedOrg = ucsbOrganizationRepository.save(org);</span>
-<span class="nc" id="L82">    return savedOrg;</span>
+<span class="fc" id="L81">    UCSBOrganization savedOrg = ucsbOrganizationRepository.save(org);</span>
+<span class="fc" id="L82">    return savedOrg;</span>
   }
 
   // DELETE organization

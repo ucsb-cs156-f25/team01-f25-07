@@ -50,7 +50,28 @@
                     "name": "EXPLANATION",
                     "type": "TEXT"
                   }
+                },
+                
+  
+                {
+                  "column": {
+                    "name": "DATE_REQUESTED",
+                    "type": "TIMESTAMP"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "DATE_NEEDED",
+                    "type": "TIMESTAMP"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "DONE",
+                    "type": "BOOLEAN"
+                  }
                 }
+
               ],
               "tableName": "RECOMMENDATIONREQUESTS"
             }

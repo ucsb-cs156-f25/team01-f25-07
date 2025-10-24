@@ -38,23 +38,6 @@ public class UCSBOrganizationController extends ApiController {
   }
 
   /**
-   * This method returns a single organization.
-   *
-   * @param code code of the organization
-   * @return a single organization
-   */
-  @Operation(summary = "Get a single UCSBOrganization by orgCode")
-  @PreAuthorize("hasRole('ROLE_USER')")
-  @GetMapping("")
-  public UCSBOrganization getById(@Parameter(name = "orgCode") @RequestParam String orgCode) {
-    UCSBOrganization org =
-        ucsbOrganizationRepository
-            .findById(orgCode)
-            .orElseThrow(() -> new EntityNotFoundException(UCSBOrganization.class, orgCode));
-    return org;
-  }
-
-  /**
    * This method creates a new diningcommons. Accessible only to users with the role "ROLE_ADMIN".
    *
    * @param orgCode the organization orgCode
@@ -79,6 +62,24 @@ public class UCSBOrganizationController extends ApiController {
 
     UCSBOrganization savedOrg = ucsbOrganizationRepository.save(org);
     return savedOrg;
+  }
+
+  /**
+   * This method returns a single organization.
+   *
+   * @param code code of the organization
+   * @return a single organization
+   */
+  @Operation(summary = "Get a single UCSBOrganization by orgCode")
+  @PreAuthorize("hasRole('ROLE_USER')")
+  @GetMapping("")
+  public UCSBOrganization getById(@Parameter(name = "orgCode") @RequestParam String orgCode) {
+    UCSBOrganization org =
+        ucsbOrganizationRepository
+            .findById(orgCode)
+            .orElseThrow(() -> new EntityNotFoundException(UCSBOrganization.class, orgCode));
+
+    return org;
   }
 
   // DELETE organization

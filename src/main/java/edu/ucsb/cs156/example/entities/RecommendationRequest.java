@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,5 +24,7 @@ public class RecommendationRequest {
   private String requesterEmail;
   private String professorEmail;
   private String explanation;
+  private LocalDateTime dateRequested;
+  private LocalDateTime dateNeeded;
   private boolean done;
 }

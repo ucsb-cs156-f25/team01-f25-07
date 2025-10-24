@@ -1,0 +1,62 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "RecommendationRequests-1",
+        "author": "SichengX",
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN"
+          },
+          {
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "RECOMMENDATIONREQUESTS"
+                }
+              }
+            ]
+          }
+        ],
+        "changes": [
+          {
+            "createTable": {
+              "columns": [
+                {
+                  "column": {
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true,
+                      "primaryKeyName": "RECOMMENDATIONREQUESTS_PK"
+                    },
+                    "name": "ID",
+                    "type": "BIGINT"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "REQUESTER_EMAIL",
+                    "type": "VARCHAR(255)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "PROFESSOR_EMAIL",
+                    "type": "VARCHAR(255)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "EXPLANATION",
+                    "type": "TEXT"
+                  }
+                }
+              ],
+              "tableName": "RECOMMENDATIONREQUESTS"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

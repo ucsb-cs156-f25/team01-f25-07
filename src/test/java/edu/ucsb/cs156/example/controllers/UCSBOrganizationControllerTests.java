@@ -187,11 +187,90 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
     assertEquals("UCSBOrganization with id 123 not found", json.get("message"));
   }
 
+  // @WithMockUser(roles = {"ADMIN", "USER"})
+  // @Test
+  // public void admin_can_edit_an_existing_organization() throws Exception {
+  //   // arrange
+  //   UCSBOrganization ucsborganization1 =
+  //       UCSBOrganization.builder()
+  //           .orgCode("UCSB")
+  //           .orgTranslationShort("Single")
+  //           .orgTranslation("Mix")
+  //           .inactive(true)
+  //           .build();
+
+  //   UCSBOrganization editeducsborganization1 =
+  //       UCSBOrganization.builder()
+  //           .orgCode("UCSB")
+  //           .orgTranslationShort("SingleLady")
+  //           .orgTranslation("Mix")
+  //           .inactive(false)
+  //           .build();
+
+  //   String requestBody = mapper.writeValueAsString(editeducsborganization1);
+
+  //   when(ucsbOrganizationRepository.findById(eq("UCSB")))
+  //       .thenReturn(Optional.of(ucsborganization1));
+
+  //   // act
+  //   MvcResult response =
+  //       mockMvc
+  //           .perform(
+  //               put("/api/UCSBOrganization?orgCode=UCSB")
+  //                   .contentType(MediaType.APPLICATION_JSON)
+  //                   .characterEncoding("utf-8")
+  //                   .content(requestBody)
+  //                   .with(csrf()))
+  //           .andExpect(status().isOk())
+  //           .andReturn();
+
+  //   // assert
+  //   verify(ucsbOrganizationRepository, times(1)).findById("UCSB");
+  //   verify(ucsbOrganizationRepository, times(1))
+  //       .save(editeducsborganization1); // should be saved with updated info
+  //   String responseString = response.getResponse().getContentAsString();
+  //   assertEquals(requestBody, responseString);
+  // }
+
+  // @WithMockUser(roles = {"ADMIN", "USER"})
+  // @Test
+  // public void admin_cannot_edit_organization_that_does_not_exist() throws Exception {
+  //   // arrange
+
+  //   UCSBOrganization editeducsborganization1 =
+  //       UCSBOrganization.builder()
+  //           .orgCode("Yuchao")
+  //           .orgTranslationShort("YuchaoZheng")
+  //           .orgTranslation("Mix")
+  //           .inactive(true)
+  //           .build();
+
+  //   String requestBody = mapper.writeValueAsString(editeducsborganization1);
+
+  //   when(ucsbOrganizationRepository.findById(eq("Yuchao"))).thenReturn(Optional.empty());
+
+  //   // act
+  //   MvcResult response =
+  //       mockMvc
+  //           .perform(
+  //               put("/api/UCSBOrganization?orgCode=Yuchao")
+  //                   .contentType(MediaType.APPLICATION_JSON)
+  //                   .characterEncoding("utf-8")
+  //                   .content(requestBody)
+  //                   .with(csrf()))
+  //           .andExpect(status().isNotFound())
+  //           .andReturn();
+
+  //   // assert
+  //   verify(ucsbOrganizationRepository, times(1)).findById("Yuchao");
+  //   Map<String, Object> json = responseToJson(response);
+  //   assertEquals("UCSBOrganization with id Yuchao not found", json.get("message"));
+  // }
   @WithMockUser(roles = {"ADMIN", "USER"})
   @Test
   public void admin_can_edit_an_existing_organization() throws Exception {
     // arrange
-    UCSBOrganization ucsborganization1 =
+    UCSBOrganization orgOrig =
         UCSBOrganization.builder()
             .orgCode("UCSB")
             .orgTranslationShort("Single")
@@ -199,7 +278,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
             .inactive(true)
             .build();
 
-    UCSBOrganization editeducsborganization1 =
+    UCSBOrganization orgEdited =
         UCSBOrganization.builder()
             .orgCode("UCSB")
             .orgTranslationShort("SingleLady")
@@ -207,10 +286,9 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
             .inactive(false)
             .build();
 
-    String requestBody = mapper.writeValueAsString(editeducsborganization1);
+    String requestBody = mapper.writeValueAsString(orgEdited);
 
-    when(ucsbOrganizationRepository.findById(eq("UCSB")))
-        .thenReturn(Optional.of(ucsborganization1));
+    when(ucsbOrganizationRepository.findById(eq("UCSB"))).thenReturn(Optional.of(orgOrig));
 
     // act
     MvcResult response =
@@ -227,7 +305,8 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
     // assert
     verify(ucsbOrganizationRepository, times(1)).findById("UCSB");
     verify(ucsbOrganizationRepository, times(1))
-        .save(editeducsborganization1); // should be saved with updated info
+        .save(orgEdited); // should be saved with updated info
+
     String responseString = response.getResponse().getContentAsString();
     assertEquals(requestBody, responseString);
   }
@@ -236,8 +315,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
   @Test
   public void admin_cannot_edit_organization_that_does_not_exist() throws Exception {
     // arrange
-
-    UCSBOrganization editeducsborganization1 =
+    UCSBOrganization orgEdited =
         UCSBOrganization.builder()
             .orgCode("Yuchao")
             .orgTranslationShort("YuchaoZheng")
@@ -245,7 +323,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
             .inactive(true)
             .build();
 
-    String requestBody = mapper.writeValueAsString(editeducsborganization1);
+    String requestBody = mapper.writeValueAsString(orgEdited);
 
     when(ucsbOrganizationRepository.findById(eq("Yuchao"))).thenReturn(Optional.empty());
 
@@ -263,6 +341,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
 
     // assert
     verify(ucsbOrganizationRepository, times(1)).findById("Yuchao");
+
     Map<String, Object> json = responseToJson(response);
     assertEquals("UCSBOrganization with id Yuchao not found", json.get("message"));
   }

@@ -282,7 +282,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
         UCSBOrganization.builder()
             .orgCode("UCSB")
             .orgTranslationShort("SingleLady")
-            .orgTranslation("Mix")
+            .orgTranslation("M")
             .inactive(false)
             .build();
 
@@ -319,7 +319,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
         UCSBOrganization.builder()
             .orgCode("Yuchao")
             .orgTranslationShort("YuchaoZheng")
-            .orgTranslation("Mix")
+            .orgTranslation("M")
             .inactive(true)
             .build();
 

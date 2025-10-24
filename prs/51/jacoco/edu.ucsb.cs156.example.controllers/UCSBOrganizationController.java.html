@@ -38,23 +38,6 @@ import org.springframework.web.bind.annotation.RestController;
   }
 
   /**
-   * This method returns a single organization.
-   *
-   * @param code code of the organization
-   * @return a single organization
-   */
-  @Operation(summary = &quot;Get a single UCSBOrganization by orgCode&quot;)
-  @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
-  @GetMapping(&quot;&quot;)
-  public UCSBOrganization getById(@Parameter(name = &quot;orgCode&quot;) @RequestParam String orgCode) {
-<span class="nc" id="L50">    UCSBOrganization org =</span>
-        ucsbOrganizationRepository
-<span class="nc" id="L52">            .findById(orgCode)</span>
-<span class="nc" id="L53">            .orElseThrow(() -&gt; new EntityNotFoundException(UCSBOrganization.class, orgCode));</span>
-<span class="nc" id="L54">    return org;</span>
-  }
-
-  /**
    * This method creates a new diningcommons. Accessible only to users with the role &quot;ROLE_ADMIN&quot;.
    *
    * @param orgCode the organization orgCode
@@ -71,14 +54,32 @@ import org.springframework.web.bind.annotation.RestController;
       @Parameter(name = &quot;orgTranslationShort&quot;) @RequestParam String orgTranslationShort,
       @Parameter(name = &quot;orgTranslation&quot;) @RequestParam String orgTranslation,
       @Parameter(name = &quot;inactive&quot;) @RequestParam boolean inactive) {
-<span class="fc" id="L74">    UCSBOrganization org = new UCSBOrganization();</span>
-<span class="fc" id="L75">    org.setOrgCode(orgCode);</span>
-<span class="fc" id="L76">    org.setOrgTranslationShort(orgTranslationShort);</span>
-<span class="fc" id="L77">    org.setOrgTranslation(orgTranslation);</span>
-<span class="fc" id="L78">    org.setInactive(inactive);</span>
+<span class="fc" id="L57">    UCSBOrganization org = new UCSBOrganization();</span>
+<span class="fc" id="L58">    org.setOrgCode(orgCode);</span>
+<span class="fc" id="L59">    org.setOrgTranslationShort(orgTranslationShort);</span>
+<span class="fc" id="L60">    org.setOrgTranslation(orgTranslation);</span>
+<span class="fc" id="L61">    org.setInactive(inactive);</span>
 
-<span class="fc" id="L80">    UCSBOrganization savedOrg = ucsbOrganizationRepository.save(org);</span>
-<span class="fc" id="L81">    return savedOrg;</span>
+<span class="fc" id="L63">    UCSBOrganization savedOrg = ucsbOrganizationRepository.save(org);</span>
+<span class="fc" id="L64">    return savedOrg;</span>
+  }
+
+  /**
+   * This method returns a single organization.
+   *
+   * @param code code of the organization
+   * @return a single organization
+   */
+  @Operation(summary = &quot;Get a single UCSBOrganization by orgCode&quot;)
+  @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+  @GetMapping(&quot;&quot;)
+  public UCSBOrganization getById(@Parameter(name = &quot;orgCode&quot;) @RequestParam String orgCode) {
+<span class="fc" id="L77">    UCSBOrganization org =</span>
+        ucsbOrganizationRepository
+<span class="fc" id="L79">            .findById(orgCode)</span>
+<span class="fc" id="L80">            .orElseThrow(() -&gt; new EntityNotFoundException(UCSBOrganization.class, orgCode));</span>
+
+<span class="fc" id="L82">    return org;</span>
   }
 
   // DELETE organization

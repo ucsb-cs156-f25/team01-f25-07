@@ -315,7 +315,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
   @Test
   public void admin_cannot_edit_organization_that_does_not_exist() throws Exception {
     // arrange
-    UCSBOrganization orgEdited =
+    UCSBOrganization Editedorg =
         UCSBOrganization.builder()
             .orgCode("Yuchao")
             .orgTranslationShort("YuchaoZheng")
@@ -323,7 +323,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
             .inactive(true)
             .build();
 
-    String requestBody = mapper.writeValueAsString(orgEdited);
+    String requestBody = mapper.writeValueAsString(Editedorg);
 
     when(ucsbOrganizationRepository.findById(eq("Yuchao"))).thenReturn(Optional.empty());
 

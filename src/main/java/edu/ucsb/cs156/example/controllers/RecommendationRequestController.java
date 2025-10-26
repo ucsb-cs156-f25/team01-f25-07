@@ -2,10 +2,12 @@ package edu.ucsb.cs156.example.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.ucsb.cs156.example.entities.RecommendationRequest;
+import edu.ucsb.cs156.example.errors.EntityNotFoundException;
 import edu.ucsb.cs156.example.repositories.RecommendationRequestRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,5 +63,38 @@ public class RecommendationRequestController extends ApiController {
     rr.setDone(done);
 
     return recommendationRequestRepository.save(rr);
+  }
+
+  @Operation(summary = "Get a single recommendation request by id")
+  @Parameter(name = "id", description = "The id of the recommendation request to look up")
+  @PreAuthorize("hasRole('ROLE_USER')")
+  @GetMapping("")
+  public RecommendationRequest getById(@RequestParam Long id) {
+    return recommendationRequestRepository
+        .findById(id)
+        .orElseThrow(() -> new EntityNotFoundException(RecommendationRequest.class, id));
+  }
+
+  @Operation(summary = "Update a single recommendation request")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @PutMapping("")
+  public RecommendationRequest updateRecommendationRequest(
+      @Parameter(name = "id") @RequestParam Long id,
+      @RequestBody @Valid RecommendationRequest incoming) {
+
+    RecommendationRequest rr =
+        recommendationRequestRepository
+            .findById(id)
+            .orElseThrow(() -> new EntityNotFoundException(RecommendationRequest.class, id));
+
+    rr.setRequesterEmail(incoming.getRequesterEmail());
+    rr.setProfessorEmail(incoming.getProfessorEmail());
+    rr.setExplanation(incoming.getExplanation());
+    rr.setDateRequested(incoming.getDateRequested());
+    rr.setDateNeeded(incoming.getDateNeeded());
+    rr.setDone(incoming.getDone());
+
+    recommendationRequestRepository.save(rr);
+    return rr;
   }
 }

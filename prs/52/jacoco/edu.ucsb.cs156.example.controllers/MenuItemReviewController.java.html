@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MenuItemReviewController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">team01</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs156.example.controllers</a> &gt; <span class="el_source">MenuItemReviewController.java</span></div><h1>MenuItemReviewController.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs156.example.controllers;
+
+import edu.ucsb.cs156.example.entities.MenuItemReview;
+import edu.ucsb.cs156.example.errors.EntityNotFoundException;
+import edu.ucsb.cs156.example.repositories.MenuItemReviewRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.time.LocalDateTime;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+/** Controller for MenuItemReview */
+@Tag(name = &quot;Menu Item Reviews&quot;)
+@RequestMapping(&quot;/api/menuitemreview&quot;)
+@RestController
+<span class="fc" id="L22">@Slf4j</span>
+<span class="fc" id="L23">public class MenuItemReviewController extends ApiController {</span>
+
+  @Autowired private MenuItemReviewRepository menuItemReviewRepository;
+
+  /** List all menu item reviews */
+  @Operation(summary = &quot;List all menu item reviews&quot;)
+  @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+  @GetMapping(&quot;/all&quot;)
+  public Iterable&lt;MenuItemReview&gt; allReviews() {
+<span class="fc" id="L32">    return menuItemReviewRepository.findAll();</span>
+  }
+
+  /** Get a single menu item review by id */
+  @Operation(summary = &quot;Get a single menu item review by id&quot;)
+  @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+  @GetMapping(&quot;&quot;)
+  public MenuItemReview getById(@Parameter(name = &quot;id&quot;) @RequestParam Long id) {
+<span class="fc" id="L40">    return menuItemReviewRepository</span>
+<span class="fc" id="L41">        .findById(id)</span>
+<span class="fc" id="L42">        .orElseThrow(() -&gt; new EntityNotFoundException(MenuItemReview.class, id));</span>
+  }
+
+  /** Create a new menu item review */
+  @Operation(summary = &quot;Create a new menu item review&quot;)
+  @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+  @PostMapping(&quot;/post&quot;)
+  public MenuItemReview postReview(
+      @Parameter(name = &quot;itemId&quot;) @RequestParam long itemId,
+      @Parameter(name = &quot;reviewerEmail&quot;) @RequestParam String reviewerEmail,
+      @Parameter(name = &quot;stars&quot;) @RequestParam int stars,
+      @Parameter(name = &quot;dateReviewed&quot;, description = &quot;ISO datetime, e.g. 2025-10-25T13:45:00&quot;)
+          @RequestParam(&quot;dateReviewed&quot;)
+          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+          LocalDateTime dateReviewed,
+      @Parameter(name = &quot;comments&quot;) @RequestParam String comments) {
+
+<span class="fc" id="L59">    MenuItemReview mir = new MenuItemReview();</span>
+<span class="fc" id="L60">    mir.setItemId(itemId);</span>
+<span class="fc" id="L61">    mir.setReviewerEmail(reviewerEmail);</span>
+<span class="fc" id="L62">    mir.setStars(stars);</span>
+<span class="fc" id="L63">    mir.setDateReviewed(dateReviewed);</span>
+<span class="fc" id="L64">    mir.setComments(comments);</span>
+
+<span class="fc" id="L66">    return menuItemReviewRepository.save(mir);</span>
+  }
+
+  /** Update a single menu item review */
+  @Operation(summary = &quot;Update a single menu item review&quot;)
+  @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+  @PutMapping(&quot;&quot;)
+  public MenuItemReview updateMenuItemReview(
+      @Parameter(name = &quot;id&quot;) @RequestParam Long id, @RequestBody MenuItemReview incoming) {
+
+<span class="fc" id="L76">    MenuItemReview existing =</span>
+        menuItemReviewRepository
+<span class="fc" id="L78">            .findById(id)</span>
+<span class="fc" id="L79">            .orElseThrow(() -&gt; new EntityNotFoundException(MenuItemReview.class, id));</span>
+
+<span class="fc" id="L81">    existing.setItemId(incoming.getItemId());</span>
+<span class="fc" id="L82">    existing.setReviewerEmail(incoming.getReviewerEmail());</span>
+<span class="fc" id="L83">    existing.setStars(incoming.getStars());</span>
+<span class="fc" id="L84">    existing.setDateReviewed(incoming.getDateReviewed());</span>
+<span class="fc" id="L85">    existing.setComments(incoming.getComments());</span>
+
+<span class="fc" id="L87">    menuItemReviewRepository.save(existing);</span>
+<span class="fc" id="L88">    return existing;</span>
+  }
+
+  /** Delete a single menu item review by id */
+  @Operation(summary = &quot;Delete a single menu item review by id&quot;)
+  @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+  @DeleteMapping(&quot;&quot;)
+  public ResponseEntity&lt;Object&gt; deleteMenuItemReview(
+      @Parameter(name = &quot;id&quot;) @RequestParam Long id) {
+
+<span class="fc" id="L98">    var mirOpt = menuItemReviewRepository.findById(id);</span>
+
+<span class="fc bfc" id="L100" title="All 2 branches covered.">    if (mirOpt.isEmpty()) {</span>
+      // Not found -&gt; 404 with message &quot;record {id} not found&quot;
+<span class="fc" id="L102">      return ResponseEntity.status(HttpStatus.NOT_FOUND)</span>
+<span class="fc" id="L103">          .body(genericMessage(String.format(&quot;record %d not found&quot;, id)));</span>
+    }
+
+    // Found -&gt; delete and return 200 with message &quot;record {id} deleted&quot;
+<span class="fc" id="L107">    menuItemReviewRepository.delete(mirOpt.get());</span>
+<span class="fc" id="L108">    return ResponseEntity.ok(genericMessage(String.format(&quot;record %d deleted&quot;, id)));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -2,67 +2,57 @@
     "databaseChangeLog": [
       {
         "changeSet": {
-          "id": "MenuItemReview-1",
-          "author": "jakindazhang",
+          "id": "UCSBDiningCommonsMenuItem-1",
+          "author": "ArmanSajjadian",
           "preConditions": [
             {
               "onFail": "MARK_RAN"
             },
             {
-              "not": {
-                "tableExists": {
-                  "tableName": "MENUITEMREVIEWS"
+              "not": [
+                {
+                  "tableExists": {
+                    "tableName": "UCSBDININGCOMMONSMENUITEM"
+                  }
                 }
-              }
+              ]
             }
           ],
           "changes": [
             {
               "createTable": {
-                "tableName": "MENUITEMREVIEWS",
                 "columns": [
                   {
                     "column": {
-                      "name": "ID",
-                      "type": "BIGINT",
                       "autoIncrement": true,
                       "constraints": {
                         "primaryKey": true,
-                        "primaryKeyName": "MENUITEMREVIEWS_PK"
-                      }
-                    }
-                  },
-                  {
-                    "column": {
-                      "name": "ITEM_ID",
+                        "primaryKeyName": "UCSBDININGCOMMONSMENUITEM_PK"
+                      },
+                      "name": "ID",
                       "type": "BIGINT"
                     }
                   },
                   {
                     "column": {
-                      "name": "REVIEWER_EMAIL",
+                      "name": "DINING_COMMONS_CODE",
                       "type": "VARCHAR(255)"
                     }
                   },
                   {
                     "column": {
-                      "name": "STARS",
-                      "type": "INT"
+                      "name": "NAME",
+                      "type": "VARCHAR(255)"
                     }
                   },
                   {
                     "column": {
-                      "name": "DATE_REVIEWED",
-                      "type": "TIMESTAMP"
-                    }
-                  },
-                  {
-                    "column": {
-                      "name": "COMMENTS",
-                      "type": "TEXT"
+                      "name": "STATION",
+                      "type": "VARCHAR(255)"
                     }
                   }
-                ]
+                ],
+                "tableName": "UCSBDININGCOMMONSMENUITEM"
               }
             }
           ]

@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+/** REST controller that exposes endpoints for {@link MenuItemReview} records. */
 @Tag(name = "Menu Item Reviews")
 @RequestMapping("/api/menuitemreview")
 @RestController

@@ -8,8 +8,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import edu.ucsb.cs156.example.ControllerTestCase;
@@ -21,7 +20,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
-import org.mockito.AdditionalAnswers;
 import org.mockito.ArgumentCaptor;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -34,10 +32,10 @@ import org.springframework.test.web.servlet.MvcResult;
 @Import(TestConfig.class)
 public class MenuItemReviewControllerTests extends ControllerTestCase {
 
-  @MockBean MenuItemReviewRepository menuItemReviewRepository;
+  @MockBean private MenuItemReviewRepository menuItemReviewRepository;
+  @MockBean private UserRepository userRepository;
 
-  @MockBean UserRepository userRepository;
-
+  // ---------- Auth checks ----------
   @Test
   public void logged_out_users_cannot_get_all() throws Exception {
     mockMvc.perform(get("/api/menuitemreview/all")).andExpect(status().is(403));
@@ -60,6 +58,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
     mockMvc.perform(post("/api/menuitemreview/post")).andExpect(status().is(403));
   }
 
+  // ---------- GET /all ----------
   @WithMockUser(roles = {"USER"})
   @Test
   public void logged_in_user_can_get_all_reviews() throws Exception {
@@ -90,48 +89,49 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
         mockMvc.perform(get("/api/menuitemreview/all")).andExpect(status().isOk()).andReturn();
 
     verify(menuItemReviewRepository, times(1)).findAll();
-
     String expectedJson = mapper.writeValueAsString(Arrays.asList(r1, r2));
     String responseString = response.getResponse().getContentAsString();
     assertEquals(expectedJson, responseString);
   }
 
+  // ---------- POST /post ----------
   @WithMockUser(roles = {"ADMIN", "USER"})
   @Test
   public void admin_can_post_new_review() throws Exception {
-    when(menuItemReviewRepository.save(any(MenuItemReview.class)))
-        .then(AdditionalAnswers.returnsFirstArg());
+    LocalDateTime dt = LocalDateTime.parse("2025-10-25T20:15:00");
+
+    MenuItemReview newReview =
+        MenuItemReview.builder()
+            .itemId(99L)
+            .reviewerEmail("admin@ucsb.edu")
+            .stars(5)
+            .dateReviewed(dt)
+            .comments("Perfect!")
+            .build();
+
+    when(menuItemReviewRepository.save(any(MenuItemReview.class))).thenReturn(newReview);
 
     MvcResult response =
         mockMvc
             .perform(
-                post("/api/menuitemreview/post")
-                    .param("itemId", "99")
-                    .param("reviewerEmail", "admin@ucsb.edu")
-                    .param("stars", "5")
-                    .param("dateReviewed", "2025-10-25T20:15:00")
-                    .param("comments", "Perfect!")
+                post("/api/menuitemreview/post?itemId=99&reviewerEmail=admin@ucsb.edu&stars=5&dateReviewed=2025-10-25T20:15:00&comments=Perfect!")
                     .with(csrf()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.itemId").value(99))
-            .andExpect(jsonPath("$.reviewerEmail").value("admin@ucsb.edu"))
-            .andExpect(jsonPath("$.stars").value(5))
-            .andExpect(jsonPath("$.dateReviewed").value("2025-10-25T20:15:00"))
-            .andExpect(jsonPath("$.comments").value("Perfect!"))
             .andReturn();
 
+    // 捕获并验证传入的保存实体，确保每个 setter 被执行
     ArgumentCaptor<MenuItemReview> captor = ArgumentCaptor.forClass(MenuItemReview.class);
     verify(menuItemReviewRepository, times(1)).save(captor.capture());
-    MenuItemReview arg = captor.getValue();
-    assertEquals(99L, arg.getItemId());
-    assertEquals("admin@ucsb.edu", arg.getReviewerEmail());
-    assertEquals(5, arg.getStars());
-    assertEquals(LocalDateTime.parse("2025-10-25T20:15:00"), arg.getDateReviewed());
-    assertEquals("Perfect!", arg.getComments());
+    MenuItemReview saved = captor.getValue();
 
+    assertEquals(99L, saved.getItemId());
+    assertEquals("admin@ucsb.edu", saved.getReviewerEmail());
+    assertEquals(5, saved.getStars());
+    assertEquals(LocalDateTime.parse("2025-10-25T20:15:00"), saved.getDateReviewed());
+    assertEquals("Perfect!", saved.getComments());
+
+    String expectedJson = mapper.writeValueAsString(newReview);
     String responseString = response.getResponse().getContentAsString();
-    String expectedJson = mapper.writeValueAsString(arg);
     assertEquals(expectedJson, responseString);
   }
 }

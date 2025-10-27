@@ -1,6 +1,7 @@
 package edu.ucsb.cs156.example.controllers;
 
 import edu.ucsb.cs156.example.entities.MenuItemReview;
+import edu.ucsb.cs156.example.errors.EntityNotFoundException;
 import edu.ucsb.cs156.example.repositories.MenuItemReviewRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -12,7 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-/** REST controller that exposes endpoints for {@link MenuItemReview} records. */
+/** Controller for MenuItemReview */
 @Tag(name = "Menu Item Reviews")
 @RequestMapping("/api/menuitemreview")
 @RestController
@@ -21,16 +22,23 @@ public class MenuItemReviewController extends ApiController {
 
   @Autowired private MenuItemReviewRepository menuItemReviewRepository;
 
-  /**
-   * Returns all menu item reviews.
-   *
-   * @return all reviews stored in the repository
-   */
+  /** List all menu item reviews */
   @Operation(summary = "List all menu item reviews")
   @PreAuthorize("hasRole('ROLE_USER')")
   @GetMapping("/all")
   public Iterable<MenuItemReview> allReviews() {
     return menuItemReviewRepository.findAll();
+  }
+
+  /** Get a single menu item review by id */
+  @Operation(summary = "Get a single menu item review by id")
+  @PreAuthorize("hasRole('ROLE_USER')")
+  @GetMapping("")
+  public MenuItemReview getById(@Parameter(name = "id") @RequestParam Long id) {
+
+    return menuItemReviewRepository
+        .findById(id)
+        .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, id));
   }
 
   /** Create a new menu item review */
@@ -46,6 +54,7 @@ public class MenuItemReviewController extends ApiController {
           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
           LocalDateTime dateReviewed,
       @Parameter(name = "comments") @RequestParam String comments) {
+
     MenuItemReview mir = new MenuItemReview();
     mir.setItemId(itemId);
     mir.setReviewerEmail(reviewerEmail);
@@ -53,7 +62,28 @@ public class MenuItemReviewController extends ApiController {
     mir.setDateReviewed(dateReviewed);
     mir.setComments(comments);
 
-    MenuItemReview savedReview = menuItemReviewRepository.save(mir);
-    return savedReview;
+    return menuItemReviewRepository.save(mir);
+  }
+
+  /** Update a single menu item review */
+  @Operation(summary = "Update a single menu item review")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @PutMapping("")
+  public MenuItemReview updateMenuItemReview(
+      @Parameter(name = "id") @RequestParam Long id, @RequestBody MenuItemReview incoming) {
+
+    MenuItemReview existing =
+        menuItemReviewRepository
+            .findById(id)
+            .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, id));
+
+    existing.setItemId(incoming.getItemId());
+    existing.setReviewerEmail(incoming.getReviewerEmail());
+    existing.setStars(incoming.getStars());
+    existing.setDateReviewed(incoming.getDateReviewed());
+    existing.setComments(incoming.getComments());
+
+    menuItemReviewRepository.save(existing);
+    return existing;
   }
 }

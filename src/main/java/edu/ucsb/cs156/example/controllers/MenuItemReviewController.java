@@ -1,7 +1,6 @@
 package edu.ucsb.cs156.example.controllers;
 
 import edu.ucsb.cs156.example.entities.MenuItemReview;
-import edu.ucsb.cs156.example.errors.EntityNotFoundException;
 import edu.ucsb.cs156.example.repositories.MenuItemReviewRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -14,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /** Controller for MenuItemReview */
+/** REST controller that exposes endpoints for {@link MenuItemReview} records. */
 @Tag(name = "Menu Item Reviews")
 @RequestMapping("/api/menuitemreview")
 @RestController
@@ -23,6 +23,11 @@ public class MenuItemReviewController extends ApiController {
   @Autowired private MenuItemReviewRepository menuItemReviewRepository;
 
   /** List all menu item reviews */
+  /**
+   * Returns all menu item reviews.
+   *
+   * @return all reviews stored in the repository
+   */
   @Operation(summary = "List all menu item reviews")
   @PreAuthorize("hasRole('ROLE_USER')")
   @GetMapping("/all")
@@ -54,7 +59,6 @@ public class MenuItemReviewController extends ApiController {
           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
           LocalDateTime dateReviewed,
       @Parameter(name = "comments") @RequestParam String comments) {
-
     MenuItemReview mir = new MenuItemReview();
     mir.setItemId(itemId);
     mir.setReviewerEmail(reviewerEmail);
@@ -85,5 +89,7 @@ public class MenuItemReviewController extends ApiController {
 
     menuItemReviewRepository.save(existing);
     return existing;
+    MenuItemReview savedReview = menuItemReviewRepository.save(mir);
+    return savedReview;
   }
 }

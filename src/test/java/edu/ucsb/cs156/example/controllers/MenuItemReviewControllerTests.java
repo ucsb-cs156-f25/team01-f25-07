@@ -2,7 +2,6 @@ package edu.ucsb.cs156.example.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -20,7 +19,6 @@ import edu.ucsb.cs156.example.testconfig.TestConfig;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -151,7 +149,11 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
             .comments("ok")
             .build();
 
-    when(menuItemReviewRepository.findById(eq(7L))).thenReturn(Optional.of(mir));
+    assertEquals(99L, saved.getItemId());
+    assertEquals("admin@ucsb.edu", saved.getReviewerEmail());
+    assertEquals(5, saved.getStars());
+    assertEquals(LocalDateTime.parse("2025-10-25T20:15:00"), saved.getDateReviewed());
+    assertEquals("Perfect!", saved.getComments());
 
     MvcResult response =
         mockMvc.perform(get("/api/menuitemreview?id=7")).andExpect(status().isOk()).andReturn();
@@ -255,5 +257,9 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
     var json = responseToJson(response);
     assertEquals("EntityNotFoundException", json.get("type"));
     assertEquals("MenuItemReview with id 67 not found", json.get("message"));
+  }
+    String expectedJson = mapper.writeValueAsString(newReview);
+    String responseString = response.getResponse().getContentAsString();
+    assertEquals(expectedJson, responseString);
   }
 }

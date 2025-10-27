@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+/** Controller for MenuItemReview */
 @Tag(name = "Menu Item Reviews")
 @RequestMapping("/api/menuitemreview")
 @RestController
@@ -21,6 +22,7 @@ public class MenuItemReviewController extends ApiController {
 
   @Autowired private MenuItemReviewRepository menuItemReviewRepository;
 
+  /** List all menu item reviews */
   @Operation(summary = "List all menu item reviews")
   @PreAuthorize("hasRole('ROLE_USER')")
   @GetMapping("/all")
@@ -28,6 +30,18 @@ public class MenuItemReviewController extends ApiController {
     return menuItemReviewRepository.findAll();
   }
 
+  /** Get a single menu item review by id */
+  @Operation(summary = "Get a single menu item review by id")
+  @PreAuthorize("hasRole('ROLE_USER')")
+  @GetMapping("")
+  public MenuItemReview getById(@Parameter(name = "id") @RequestParam Long id) {
+
+    return menuItemReviewRepository
+        .findById(id)
+        .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, id));
+  }
+
+  /** Create a new menu item review */
   @Operation(summary = "Create a new menu item review")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   @PostMapping("/post")
@@ -51,13 +65,25 @@ public class MenuItemReviewController extends ApiController {
     return menuItemReviewRepository.save(mir);
   }
 
-  @Operation(summary = "Get a single menu item review by id")
-  @PreAuthorize("hasRole('ROLE_USER')")
-  @GetMapping("")
-  public MenuItemReview getById(@Parameter(name = "id") @RequestParam Long id) {
+  /** Update a single menu item review */
+  @Operation(summary = "Update a single menu item review")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @PutMapping("")
+  public MenuItemReview updateMenuItemReview(
+      @Parameter(name = "id") @RequestParam Long id, @RequestBody MenuItemReview incoming) {
 
-    return menuItemReviewRepository
-        .findById(id)
-        .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, id));
+    MenuItemReview existing =
+        menuItemReviewRepository
+            .findById(id)
+            .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, id));
+
+    existing.setItemId(incoming.getItemId());
+    existing.setReviewerEmail(incoming.getReviewerEmail());
+    existing.setStars(incoming.getStars());
+    existing.setDateReviewed(incoming.getDateReviewed());
+    existing.setComments(incoming.getComments());
+
+    menuItemReviewRepository.save(existing);
+    return existing;
   }
 }

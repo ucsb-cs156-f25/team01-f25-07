@@ -1,0 +1,377 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for edu.ucsb.cs156:team01:jar:1.0.0
+[WARNING] 'parent.relativePath' of POM edu.ucsb.cs156:team01:1.0.0 (/Users/qizhang/cs156/team01-f25-07/pom.xml) points at edu.ucsb.cs156.spring:hello instead of org.springframework.boot:spring-boot-starter-parent, please verify your project structure @ line 11, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] -----------------------< edu.ucsb.cs156:team01 >------------------------
+[INFO] Building team01 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> javadoc:3.10.1:javadoc (default-cli) > generate-sources @ team01 >>>
+[INFO] 
+[INFO] --- jacoco:0.8.12:prepare-agent (default) @ team01 ---
+[INFO] argLine set to -javaagent:/Users/qizhang/.m2/repository/org/jacoco/org.jacoco.agent/0.8.12/org.jacoco.agent-0.8.12-runtime.jar=destfile=/Users/qizhang/cs156/team01-f25-07/target/jacoco.exec,excludes=**/edu/ucsb/cs156/example/aop/LoggingAspect.*:**/edu/ucsb/cs156/example/config/*:**/edu/ucsb/cs156/example/services/CurrentUserServiceImpl.*:**/edu/ucsb/cs156/example/services/GrantedAuthoritiesService.*:**/edu/ucsb/cs156/example/ExampleApplication.*:**/edu/ucsb/cs156/example/services/wiremock/*
+[INFO] 
+[INFO] --- git-commit-id:8.0.2:revision (default) @ team01 ---
+[INFO] dotGitDirectory '/Users/qizhang/cs156/team01-f25-07/.git'
+[INFO] Collected git.build.user.name with value Jakinda Zhang
+[INFO] Collected git.build.user.email with value qzhang423@ucsb.edu
+[INFO] Collected git.branch with value re-push-#27-jakinda
+[INFO] Collected git.commit.id.describe with value 3a0df99
+[INFO] Collected git.commit.id.describe-short with value 3a0df99
+[INFO] Collected git.commit.id.full with value 3a0df993eceaea81eff847a24222003b2a9ee477
+[INFO] Collected git.commit.id.abbrev with value 3a0df99
+[INFO] Collected git.dirty with value false
+[INFO] Collected git.commit.user.name with value Jakinda Zhang
+[INFO] Collected git.commit.user.email with value qzhang423@ucsb.edu
+[INFO] Collected git.commit.message.full with value rewrite the part for Javadoc error
+[INFO] Collected git.commit.message.short with value rewrite the part for Javadoc error
+[INFO] Collected git.commit.time with value 2025-10-26T20:13:36-07:00
+[INFO] Collected git.commit.author.time with value 2025-10-26T20:13:36-07:00
+[INFO] Collected git.commit.committer.time with value 2025-10-26T20:13:36-07:00
+[INFO] Collected git.remote.origin.url with value git@github.com:ucsb-cs156-f25/team01-f25-07.git
+[INFO] Collected git.tags with value 
+[INFO] Collected git.tag with value 
+[INFO] Collected git.closest.tag.name with value 
+[INFO] Collected git.closest.tag.commit.count with value 
+[INFO] Collected git.total.commit.count with value 18
+[INFO] Collected git.local.branch.ahead with value NO_REMOTE
+[INFO] Collected git.local.branch.behind with value NO_REMOTE
+[INFO] Collected git.build.time with value 2025-10-26T20:26:40-07:00
+[INFO] Collected git.build.version with value 1.0.0
+[INFO] Collected git.build.host with value QideMacBook-Air.local
+[INFO] including property 'git.tags' in results
+[INFO] including property 'git.build.version' in results
+[INFO] including property 'git.branch' in results
+[INFO] including property 'git.build.host' in results
+[INFO] including property 'git.commit.user.email' in results
+[INFO] including property 'git.local.branch.behind' in results
+[INFO] including property 'git.commit.author.time' in results
+[INFO] including property 'git.build.user.name' in results
+[INFO] including property 'git.dirty' in results
+[INFO] including property 'git.closest.tag.commit.count' in results
+[INFO] including property 'git.commit.user.name' in results
+[INFO] including property 'git.commit.id.abbrev' in results
+[INFO] including property 'git.commit.id.describe-short' in results
+[INFO] including property 'git.total.commit.count' in results
+[INFO] including property 'git.commit.id.describe' in results
+[INFO] including property 'git.build.user.email' in results
+[INFO] including property 'git.commit.message.short' in results
+[INFO] including property 'git.commit.committer.time' in results
+[INFO] including property 'git.commit.id.full' in results
+[INFO] including property 'git.tag' in results
+[INFO] including property 'git.closest.tag.name' in results
+[INFO] including property 'git.local.branch.ahead' in results
+[INFO] including property 'git.commit.time' in results
+[INFO] including property 'git.build.time' in results
+[INFO] including property 'git.commit.message.full' in results
+[INFO] including property 'git.remote.origin.url' in results
+[INFO] Reading existing properties file [/Users/qizhang/cs156/team01-f25-07/target/classes/git.properties] (for project team01)...
+[INFO] Properties file [/Users/qizhang/cs156/team01-f25-07/target/classes/git.properties] is up-to-date (for module team01)...
+[INFO] 
+[INFO] --- git-commit-id:8.0.2:revision (get-the-git-infos) @ team01 ---
+[INFO] dotGitDirectory '/Users/qizhang/cs156/team01-f25-07/.git'
+[INFO] Collected git.build.user.name with value Jakinda Zhang
+[INFO] Collected git.build.user.email with value qzhang423@ucsb.edu
+[INFO] Collected git.branch with value re-push-#27-jakinda
+[INFO] Collected git.commit.id.describe with value 3a0df99
+[INFO] Collected git.commit.id.describe-short with value 3a0df99
+[INFO] Collected git.commit.id.full with value 3a0df993eceaea81eff847a24222003b2a9ee477
+[INFO] Collected git.commit.id.abbrev with value 3a0df99
+[INFO] Collected git.dirty with value false
+[INFO] Collected git.commit.user.name with value Jakinda Zhang
+[INFO] Collected git.commit.user.email with value qzhang423@ucsb.edu
+[INFO] Collected git.commit.message.full with value rewrite the part for Javadoc error
+[INFO] Collected git.commit.message.short with value rewrite the part for Javadoc error
+[INFO] Collected git.commit.time with value 2025-10-26T20:13:36-07:00
+[INFO] Collected git.commit.author.time with value 2025-10-26T20:13:36-07:00
+[INFO] Collected git.commit.committer.time with value 2025-10-26T20:13:36-07:00
+[INFO] Collected git.remote.origin.url with value git@github.com:ucsb-cs156-f25/team01-f25-07.git
+[INFO] Collected git.tags with value 
+[INFO] Collected git.tag with value 
+[INFO] Collected git.closest.tag.name with value 
+[INFO] Collected git.closest.tag.commit.count with value 
+[INFO] Collected git.total.commit.count with value 18
+[INFO] Collected git.local.branch.ahead with value NO_REMOTE
+[INFO] Collected git.local.branch.behind with value NO_REMOTE
+[INFO] Collected git.build.time with value 2025-10-26T20:26:40-07:00
+[INFO] Collected git.build.version with value 1.0.0
+[INFO] Collected git.build.host with value QideMacBook-Air.local
+[INFO] including property 'git.tags' in results
+[INFO] including property 'git.build.version' in results
+[INFO] including property 'git.branch' in results
+[INFO] including property 'git.build.host' in results
+[INFO] including property 'git.commit.user.email' in results
+[INFO] including property 'git.local.branch.behind' in results
+[INFO] including property 'git.commit.author.time' in results
+[INFO] including property 'git.build.user.name' in results
+[INFO] including property 'git.dirty' in results
+[INFO] including property 'git.closest.tag.commit.count' in results
+[INFO] including property 'git.commit.user.name' in results
+[INFO] including property 'git.commit.id.abbrev' in results
+[INFO] including property 'git.commit.id.describe-short' in results
+[INFO] including property 'git.total.commit.count' in results
+[INFO] including property 'git.commit.id.describe' in results
+[INFO] including property 'git.build.user.email' in results
+[INFO] including property 'git.commit.message.short' in results
+[INFO] including property 'git.commit.committer.time' in results
+[INFO] including property 'git.commit.id.full' in results
+[INFO] including property 'git.tag' in results
+[INFO] including property 'git.closest.tag.name' in results
+[INFO] including property 'git.local.branch.ahead' in results
+[INFO] including property 'git.commit.time' in results
+[INFO] including property 'git.build.time' in results
+[INFO] including property 'git.commit.message.full' in results
+[INFO] including property 'git.remote.origin.url' in results
+[INFO] Reading existing properties file [/Users/qizhang/cs156/team01-f25-07/target/classes/git.properties] (for project team01)...
+[INFO] Properties file [/Users/qizhang/cs156/team01-f25-07/target/classes/git.properties] is up-to-date (for module team01)...
+[INFO] 
+[INFO] --- git-code-format:5.3:install-hooks (install-formatter-hook) @ team01 ---
+[INFO] Installing git hooks
+[INFO] Installed git hooks
+[INFO] 
+[INFO] <<< javadoc:3.10.1:javadoc (default-cli) < generate-sources @ team01 <<<
+[INFO] 
+[INFO] 
+[INFO] --- javadoc:3.10.1:javadoc (default-cli) @ team01 ---
+[INFO] No previous run data found, generating javadoc.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.055 s
+[INFO] Finished at: 2025-10-26T20:26:42-07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-javadoc-plugin:3.10.1:javadoc (default-cli) on project team01: An error has occurred in Javadoc report generation: 
+[ERROR] Exit code: 1
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/ApiController.java:15: warning: use of default constructor, which does not provide a comment
+[ERROR] public abstract class ApiController {
+[ERROR]                 ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/entities/Articles.java:19: warning: use of default constructor, which does not provide a comment
+[ERROR] public class Articles {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/CSRFController.java:19: warning: use of default constructor, which does not provide a comment
+[ERROR] public class CSRFController {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/models/CurrentUser.java:17: warning: use of default constructor, which does not provide a comment
+[ERROR] public class CurrentUser {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/CurrentUserService.java:14: warning: use of default constructor, which does not provide a comment
+[ERROR] public abstract class CurrentUserService {
+[ERROR]                 ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/CurrentUserServiceImpl.java:30: warning: use of default constructor, which does not provide a comment
+[ERROR] public class CurrentUserServiceImpl extends CurrentUserService {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/ExampleApplication.java:31: warning: no @return
+[ERROR]   public ApplicationRunner wiremockApplicationRunner() {
+[ERROR]                            ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/ExampleApplication.java:42: warning: no @return
+[ERROR]   public ApplicationRunner developmentApplicationRunner() {
+[ERROR]                            ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/ExampleApplication.java:21: warning: use of default constructor, which does not provide a comment
+[ERROR] public class ExampleApplication {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/GrantedAuthoritiesService.java:17: warning: use of default constructor, which does not provide a comment
+[ERROR] public class GrantedAuthoritiesService {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/HomepageController.java:9: warning: no comment
+[ERROR] public class HomepageController {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/HomepageController.java:9: warning: use of default constructor, which does not provide a comment
+[ERROR] public class HomepageController {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/HomepageController.java:14: warning: no comment
+[ERROR]   public String index() {
+[ERROR]                 ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/entities/Job.java:29: warning: no comment
+[ERROR] public class Job {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/entities/Job.java:29: warning: use of default constructor, which does not provide a comment
+[ERROR] public class Job {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/jobs/JobContext.java:10: warning: no comment
+[ERROR] public class JobContext {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/jobs/JobContext.java:10: warning: use of default constructor, which does not provide a comment
+[ERROR] public class JobContext {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/jobs/JobContext.java:14: warning: no comment
+[ERROR]   public void log(String message) {
+[ERROR]               ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/jobs/JobContextConsumer.java:4: warning: no comment
+[ERROR] public interface JobContextConsumer {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/jobs/JobContextConsumer.java:5: warning: no comment
+[ERROR]   void accept(JobContext c) throws Exception;
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/JobsController.java:29: warning: no comment
+[ERROR] public class JobsController extends ApiController {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/JobsController.java:29: warning: use of default constructor, which does not provide a comment
+[ERROR] public class JobsController extends ApiController {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/JobsController.java:39: warning: no comment
+[ERROR]   public Iterable<Job> allJobs() {
+[ERROR]                        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/JobsController.java:47: warning: no comment
+[ERROR]   public Map<String, String> deleteAllJobs() {
+[ERROR]                              ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/JobsController.java:68: warning: no comment
+[ERROR]   public Map<String, String> deleteAllJobs(@Parameter(name = "id") @RequestParam Long id) {
+[ERROR]                              ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/JobsController.java:55: warning: no comment
+[ERROR]   public Job getJobLogById(
+[ERROR]              ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/JobsController.java:90: warning: no comment
+[ERROR]   public String getJobLogs(@Parameter(name = "id", description = "Job ID") @PathVariable Long id) {
+[ERROR]                 ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/JobsController.java:79: warning: no comment
+[ERROR]   public Job launchTestJob(
+[ERROR]              ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/jobs/JobService.java:12: warning: no comment
+[ERROR] public class JobService {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/jobs/JobService.java:12: warning: use of default constructor, which does not provide a comment
+[ERROR] public class JobService {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/jobs/JobService.java:44: warning: no comment
+[ERROR]   public String getJobLogs(Long jobId) {
+[ERROR]                 ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/jobs/JobService.java:19: warning: no comment
+[ERROR]   public Job runAsJob(JobContextConsumer jobFunction) {
+[ERROR]              ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/jobs/JobService.java:29: warning: no comment
+[ERROR]   public void runJobAsync(Job job, JobContextConsumer jobFunction) {
+[ERROR]               ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/repositories/JobsRepository.java:8: warning: no comment
+[ERROR] public interface JobsRepository extends CrudRepository<Job, Long> {}
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/aop/LoggingAspect.java:27: warning: use of default constructor, which does not provide a comment
+[ERROR] public class LoggingAspect {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/entities/MenuItemReview.java:18: warning: no comment
+[ERROR] public class MenuItemReview {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/entities/MenuItemReview.java:18: warning: use of default constructor, which does not provide a comment
+[ERROR] public class MenuItemReview {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/MenuItemReviewController.java:27: error: unknown tag: MenuItemReview
+[ERROR]    * @return Iterable<MenuItemReview>
+[ERROR]                      ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/MenuItemReviewController.java:40: warning: no @param for itemId
+[ERROR]   public MenuItemReview postReview(
+[ERROR]                         ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/MenuItemReviewController.java:40: warning: no @param for reviewerEmail
+[ERROR]   public MenuItemReview postReview(
+[ERROR]                         ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/MenuItemReviewController.java:40: warning: no @param for stars
+[ERROR]   public MenuItemReview postReview(
+[ERROR]                         ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/MenuItemReviewController.java:40: warning: no @param for dateReviewed
+[ERROR]   public MenuItemReview postReview(
+[ERROR]                         ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/MenuItemReviewController.java:40: warning: no @param for comments
+[ERROR]   public MenuItemReview postReview(
+[ERROR]                         ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/MenuItemReviewController.java:40: warning: no @return
+[ERROR]   public MenuItemReview postReview(
+[ERROR]                         ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/MenuItemReviewController.java:20: warning: use of default constructor, which does not provide a comment
+[ERROR] public class MenuItemReviewController extends ApiController {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/repositories/MenuItemReviewRepository.java:8: warning: no comment
+[ERROR] public interface MenuItemReviewRepository extends CrudRepository<MenuItemReview, Long> {}
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/entities/Restaurant.java:18: warning: use of default constructor, which does not provide a comment
+[ERROR] public class Restaurant {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/RestaurantsController.java:25: warning: use of default constructor, which does not provide a comment
+[ERROR] public class RestaurantsController extends ApiController {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/config/SecurityConfig.java:70: warning: no @return
+[ERROR]   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+[ERROR]                              ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/config/SecurityConfig.java:70: warning: no @throws for java.lang.Exception
+[ERROR]   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+[ERROR]                              ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/config/SecurityConfig.java:96: warning: no @return
+[ERROR]   public WebSecurityCustomizer webSecurityCustomizer() {
+[ERROR]                                ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/config/SecurityConfig.java:54: warning: use of default constructor, which does not provide a comment
+[ERROR] public class SecurityConfig {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/models/SystemInfo.java:18: warning: use of default constructor, which does not provide a comment
+[ERROR] public class SystemInfo {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/SystemInfoController.java:26: warning: use of default constructor, which does not provide a comment
+[ERROR] public class SystemInfoController extends ApiController {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/SystemInfoService.java:11: warning: use of default constructor, which does not provide a comment
+[ERROR] public abstract class SystemInfoService {
+[ERROR]                 ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/SystemInfoServiceImpl.java:18: warning: use of default constructor, which does not provide a comment
+[ERROR] public class SystemInfoServiceImpl extends SystemInfoService {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/SystemInfoServiceImpl.java:38: warning: no comment
+[ERROR]   public static String githubUrl(String repo, String commit) {
+[ERROR]                        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/jobs/TestJob.java:8: warning: no comment
+[ERROR] public class TestJob implements JobContextConsumer {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/jobs/TestJob.java:8: warning: use of default constructor, which does not provide a comment
+[ERROR] public class TestJob implements JobContextConsumer {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/entities/UCSBDate.java:22: warning: use of default constructor, which does not provide a comment
+[ERROR] public class UCSBDate {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/UCSBDatesController.java:76: warning: no @throws for com.fasterxml.jackson.core.JsonProcessingException
+[ERROR]   public UCSBDate postUCSBDate(
+[ERROR]                   ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/UCSBDatesController.java:30: warning: use of default constructor, which does not provide a comment
+[ERROR] public class UCSBDatesController extends ApiController {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/entities/UCSBDiningCommons.java:20: warning: use of default constructor, which does not provide a comment
+[ERROR] public class UCSBDiningCommons {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/UCSBDiningCommonsController.java:27: warning: use of default constructor, which does not provide a comment
+[ERROR] public class UCSBDiningCommonsController extends ApiController {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/entities/User.java:19: warning: use of default constructor, which does not provide a comment
+[ERROR] public class User {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/UserInfoController.java:15: warning: use of default constructor, which does not provide a comment
+[ERROR] public class UserInfoController extends ApiController {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/controllers/UsersController.java:24: warning: use of default constructor, which does not provide a comment
+[ERROR] public class UsersController extends ApiController {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/wiremock/WiremockService.java:13: warning: use of default constructor, which does not provide a comment
+[ERROR] public abstract class WiremockService {
+[ERROR]                 ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/wiremock/WiremockServiceDummy.java:17: warning: use of default constructor, which does not provide a comment
+[ERROR] public class WiremockServiceDummy extends WiremockService {
+[ERROR]        ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/wiremock/WiremockServiceImpl.java:47: warning: no @param for isAdmin
+[ERROR]   public static void setupOauthMocks(Stubbing s, boolean isAdmin) {
+[ERROR]                      ^
+[ERROR] /Users/qizhang/cs156/team01-f25-07/src/main/java/edu/ucsb/cs156/example/services/wiremock/WiremockServiceImpl.java:29: warning: use of default constructor, which does not provide a comment
+[ERROR] public class WiremockServiceImpl extends WiremockService {
+[ERROR]        ^
+[ERROR] 1 error
+[ERROR] 70 warnings
+[ERROR] Command line was: /Users/qizhang/.sdkman/candidates/java/21.0.6-librca/bin/javadoc -J-Duser.language= -J-Duser.country= @options @packages
+[ERROR] 
+[ERROR] Refer to the generated Javadoc files in '/Users/qizhang/cs156/team01-f25-07/target/reports/apidocs' dir.
+[ERROR] 
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

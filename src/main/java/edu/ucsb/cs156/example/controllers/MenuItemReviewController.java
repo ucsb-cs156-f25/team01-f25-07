@@ -10,9 +10,12 @@ import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+/** Controller for MenuItemReview */
 @Tag(name = "Menu Item Reviews")
 @RequestMapping("/api/menuitemreview")
 @RestController
@@ -21,6 +24,7 @@ public class MenuItemReviewController extends ApiController {
 
   @Autowired private MenuItemReviewRepository menuItemReviewRepository;
 
+  /** List all menu item reviews */
   @Operation(summary = "List all menu item reviews")
   @PreAuthorize("hasRole('ROLE_USER')")
   @GetMapping("/all")
@@ -28,6 +32,17 @@ public class MenuItemReviewController extends ApiController {
     return menuItemReviewRepository.findAll();
   }
 
+  /** Get a single menu item review by id */
+  @Operation(summary = "Get a single menu item review by id")
+  @PreAuthorize("hasRole('ROLE_USER')")
+  @GetMapping("")
+  public MenuItemReview getById(@Parameter(name = "id") @RequestParam Long id) {
+    return menuItemReviewRepository
+        .findById(id)
+        .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, id));
+  }
+
+  /** Create a new menu item review */
   @Operation(summary = "Create a new menu item review")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   @PostMapping("/post")
@@ -51,13 +66,45 @@ public class MenuItemReviewController extends ApiController {
     return menuItemReviewRepository.save(mir);
   }
 
-  @Operation(summary = "Get a single menu item review by id")
-  @PreAuthorize("hasRole('ROLE_USER')")
-  @GetMapping("")
-  public MenuItemReview getById(@Parameter(name = "id") @RequestParam Long id) {
+  /** Update a single menu item review */
+  @Operation(summary = "Update a single menu item review")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @PutMapping("")
+  public MenuItemReview updateMenuItemReview(
+      @Parameter(name = "id") @RequestParam Long id, @RequestBody MenuItemReview incoming) {
 
-    return menuItemReviewRepository
-        .findById(id)
-        .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, id));
+    MenuItemReview existing =
+        menuItemReviewRepository
+            .findById(id)
+            .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, id));
+
+    existing.setItemId(incoming.getItemId());
+    existing.setReviewerEmail(incoming.getReviewerEmail());
+    existing.setStars(incoming.getStars());
+    existing.setDateReviewed(incoming.getDateReviewed());
+    existing.setComments(incoming.getComments());
+
+    menuItemReviewRepository.save(existing);
+    return existing;
+  }
+
+  /** Delete a single menu item review by id */
+  @Operation(summary = "Delete a single menu item review by id")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @DeleteMapping("")
+  public ResponseEntity<Object> deleteMenuItemReview(
+      @Parameter(name = "id") @RequestParam Long id) {
+
+    var mirOpt = menuItemReviewRepository.findById(id);
+
+    if (mirOpt.isEmpty()) {
+      // Not found -> 404 with message "record {id} not found"
+      return ResponseEntity.status(HttpStatus.NOT_FOUND)
+          .body(genericMessage(String.format("record %d not found", id)));
+    }
+
+    // Found -> delete and return 200 with message "record {id} deleted"
+    menuItemReviewRepository.delete(mirOpt.get());
+    return ResponseEntity.ok(genericMessage(String.format("record %d deleted", id)));
   }
 }

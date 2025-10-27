@@ -22,9 +22,9 @@ public class MenuItemReviewController extends ApiController {
   @Autowired private MenuItemReviewRepository menuItemReviewRepository;
 
   /**
-   * List all menu item reviews
+   * Returns all menu item reviews.
    *
-   * @return Iterable<MenuItemReview>
+   * @return all reviews stored in the repository
    */
   @Operation(summary = "List all menu item reviews")
   @PreAuthorize("hasRole('ROLE_USER')")

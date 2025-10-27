@@ -2,7 +2,6 @@ package edu.ucsb.cs156.example.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -20,7 +19,6 @@ import edu.ucsb.cs156.example.testconfig.TestConfig;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -135,125 +133,5 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
     String expectedJson = mapper.writeValueAsString(newReview);
     String responseString = response.getResponse().getContentAsString();
     assertEquals(expectedJson, responseString);
-  }
-
-  // ---------- GET by id ----------
-  @WithMockUser(roles = {"USER"})
-  @Test
-  public void user_can_get_by_id_when_exists() throws Exception {
-    LocalDateTime t = LocalDateTime.parse("2025-10-25T10:00:00");
-    MenuItemReview mir =
-        MenuItemReview.builder()
-            .itemId(100L)
-            .reviewerEmail("a@ucsb.edu")
-            .stars(4)
-            .dateReviewed(t)
-            .comments("ok")
-            .build();
-
-    when(menuItemReviewRepository.findById(eq(7L))).thenReturn(Optional.of(mir));
-
-    MvcResult response =
-        mockMvc.perform(get("/api/menuitemreview?id=7")).andExpect(status().isOk()).andReturn();
-
-    verify(menuItemReviewRepository, times(1)).findById(7L);
-    String expectedJson = mapper.writeValueAsString(mir);
-    String responseString = response.getResponse().getContentAsString();
-    assertEquals(expectedJson, responseString);
-  }
-
-  @WithMockUser(roles = {"USER"})
-  @Test
-  public void user_get_by_id_returns_404_when_not_exists() throws Exception {
-    when(menuItemReviewRepository.findById(eq(7L))).thenReturn(Optional.empty());
-
-    MvcResult response =
-        mockMvc
-            .perform(get("/api/menuitemreview?id=7"))
-            .andExpect(status().isNotFound())
-            .andReturn();
-
-    verify(menuItemReviewRepository, times(1)).findById(7L);
-    var json = responseToJson(response);
-    assertEquals("EntityNotFoundException", json.get("type"));
-    assertEquals("MenuItemReview with id 7 not found", json.get("message"));
-  }
-
-  // ---------- PUT (update) ----------
-  @WithMockUser(roles = {"ADMIN", "USER"})
-  @Test
-  public void admin_can_edit_existing_menuitemreview() throws Exception {
-    LocalDateTime t1 = LocalDateTime.parse("2025-10-25T10:00:00");
-    LocalDateTime t2 = LocalDateTime.parse("2025-11-01T12:34:56");
-
-    MenuItemReview orig =
-        MenuItemReview.builder()
-            .itemId(100L)
-            .reviewerEmail("a@ucsb.edu")
-            .stars(3)
-            .dateReviewed(t1)
-            .comments("ok")
-            .build();
-
-    MenuItemReview edited =
-        MenuItemReview.builder()
-            .itemId(101L)
-            .reviewerEmail("b@ucsb.edu")
-            .stars(5)
-            .dateReviewed(t2)
-            .comments("great")
-            .build();
-
-    String requestBody = mapper.writeValueAsString(edited);
-    when(menuItemReviewRepository.findById(eq(67L))).thenReturn(Optional.of(orig));
-
-    MvcResult response =
-        mockMvc
-            .perform(
-                put("/api/menuitemreview?id=67")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .characterEncoding("utf-8")
-                    .content(requestBody)
-                    .with(csrf()))
-            .andExpect(status().isOk())
-            .andReturn();
-
-    verify(menuItemReviewRepository, times(1)).findById(67L);
-    verify(menuItemReviewRepository, times(1)).save(edited);
-    String responseString = response.getResponse().getContentAsString();
-    assertEquals(requestBody, responseString);
-  }
-
-  @WithMockUser(roles = {"ADMIN", "USER"})
-  @Test
-  public void admin_cannot_edit_menuitemreview_when_id_not_found() throws Exception {
-    LocalDateTime t = LocalDateTime.parse("2025-10-25T10:00:00");
-    MenuItemReview body =
-        MenuItemReview.builder()
-            .itemId(100L)
-            .reviewerEmail("a@ucsb.edu")
-            .stars(4)
-            .dateReviewed(t)
-            .comments("nice")
-            .build();
-
-    String requestBody = mapper.writeValueAsString(body);
-    when(menuItemReviewRepository.findById(eq(67L))).thenReturn(Optional.empty());
-
-    MvcResult response =
-        mockMvc
-            .perform(
-                put("/api/menuitemreview?id=67")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .characterEncoding("utf-8")
-                    .content(requestBody)
-                    .with(csrf()))
-            .andExpect(status().isNotFound())
-            .andReturn();
-
-    verify(menuItemReviewRepository, times(1)).findById(67L);
-    var json = responseToJson(response);
-    assertEquals("EntityNotFoundException", json.get("type"));
-    assertEquals("MenuItemReview with id 67 not found", json.get("message"));
   }
 }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MenuItemReviewController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">team01</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs156.example.controllers</a> &gt; <span class="el_source">MenuItemReviewController.java</span></div><h1>MenuItemReviewController.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs156.example.controllers;
+
+import edu.ucsb.cs156.example.entities.MenuItemReview;
+import edu.ucsb.cs156.example.repositories.MenuItemReviewRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.time.LocalDateTime;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+/** REST controller that exposes endpoints for {@link MenuItemReview} records. */
+@Tag(name = &quot;Menu Item Reviews&quot;)
+@RequestMapping(&quot;/api/menuitemreview&quot;)
+@RestController
+<span class="fc" id="L19">@Slf4j</span>
+<span class="fc" id="L20">public class MenuItemReviewController extends ApiController {</span>
+
+  @Autowired private MenuItemReviewRepository menuItemReviewRepository;
+
+  /**
+   * List all menu item reviews
+   *
+   * @return Iterable&lt;MenuItemReview&gt;
+   */
+  @Operation(summary = &quot;List all menu item reviews&quot;)
+  @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+  @GetMapping(&quot;/all&quot;)
+  public Iterable&lt;MenuItemReview&gt; allReviews() {
+<span class="fc" id="L33">    return menuItemReviewRepository.findAll();</span>
+  }
+
+  /** Create a new menu item review */
+  @Operation(summary = &quot;Create a new menu item review&quot;)
+  @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+  @PostMapping(&quot;/post&quot;)
+  public MenuItemReview postReview(
+      @Parameter(name = &quot;itemId&quot;) @RequestParam long itemId,
+      @Parameter(name = &quot;reviewerEmail&quot;) @RequestParam String reviewerEmail,
+      @Parameter(name = &quot;stars&quot;) @RequestParam int stars,
+      @Parameter(name = &quot;dateReviewed&quot;, description = &quot;ISO datetime, e.g. 2025-10-25T13:45:00&quot;)
+          @RequestParam(&quot;dateReviewed&quot;)
+          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+          LocalDateTime dateReviewed,
+      @Parameter(name = &quot;comments&quot;) @RequestParam String comments) {
+<span class="fc" id="L49">    MenuItemReview mir = new MenuItemReview();</span>
+<span class="fc" id="L50">    mir.setItemId(itemId);</span>
+<span class="fc" id="L51">    mir.setReviewerEmail(reviewerEmail);</span>
+<span class="fc" id="L52">    mir.setStars(stars);</span>
+<span class="fc" id="L53">    mir.setDateReviewed(dateReviewed);</span>
+<span class="fc" id="L54">    mir.setComments(comments);</span>
+
+<span class="fc" id="L56">    MenuItemReview savedReview = menuItemReviewRepository.save(mir);</span>
+<span class="fc" id="L57">    return savedReview;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

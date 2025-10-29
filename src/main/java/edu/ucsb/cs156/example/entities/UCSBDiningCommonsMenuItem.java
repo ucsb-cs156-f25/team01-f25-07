@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity(name = "ucsbdiningcommonsmenuitem")
 public class UCSBDiningCommonsMenuItem {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;

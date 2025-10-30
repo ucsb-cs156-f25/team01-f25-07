@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f25/team01-f25-07
 owner: ucsb-cs156-f25
 repo_name: team01-f25-07
-pull_requests: [{"author":{"id":"U_kgDOCVJ10Q","is_bot":false,"login":"ArmanSajjadian","name":""},"headRefName":"as-delete","number":74,"title":"as - delet for menu items, tests later","url":"https://github.com/ucsb-cs156-f25/team01-f25-07/pull/74"}]
+pull_requests: [{"author":{"id":"MDQ6VXNlcjUxOTAxMTQ3","is_bot":false,"login":"MatthewMandell","name":""},"headRefName":"HelpRequestController","number":75,"title":"controllah time","url":"https://github.com/ucsb-cs156-f25/team01-f25-07/pull/75"},{"author":{"id":"U_kgDOCVJ10Q","is_bot":false,"login":"ArmanSajjadian","name":""},"headRefName":"as-delete","number":74,"title":"as - delet for menu items, tests later","url":"https://github.com/ucsb-cs156-f25/team01-f25-07/pull/74"}]

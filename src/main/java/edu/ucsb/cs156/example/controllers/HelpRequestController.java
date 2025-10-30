@@ -2,6 +2,7 @@ package edu.ucsb.cs156.example.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.ucsb.cs156.example.entities.HelpRequest;
+import edu.ucsb.cs156.example.errors.EntityNotFoundException;
 import edu.ucsb.cs156.example.repositories.HelpRequestRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/** This is a REST controller for HelpRequest */
 @Tag(name = "HelpRequest")
 @RequestMapping("/api/HelpRequest")
 @RestController
@@ -36,6 +38,24 @@ public class HelpRequestController extends ApiController {
   public Iterable<HelpRequest> allHelpRequests() {
     Iterable<HelpRequest> requests = helpRequestRepository.findAll();
     return requests;
+  }
+
+  /**
+   * Get a single help request by id
+   *
+   * @param id the id of the help request
+   * @return a HelpRequest
+   */
+  @Operation(summary = "Get a single help request")
+  @PreAuthorize("hasRole('ROLE_USER')")
+  @GetMapping("")
+  public HelpRequest getById(@Parameter(name = "id") @RequestParam Long id) {
+    HelpRequest helpRequest =
+        helpRequestRepository
+            .findById(id)
+            .orElseThrow(() -> new EntityNotFoundException(HelpRequest.class, id));
+
+    return helpRequest;
   }
 
   /**
